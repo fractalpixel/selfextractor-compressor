@@ -28,7 +28,7 @@ With the advent of webassembly, it is probably possible to create more compact p
 
 ## Usage
 
-    selfextractor-compressor input.js compressed-output.js
+    selfextractor-compressor  --in input.js  --out compressed-output.js
 
 
 ## Example compile script utilizing the selfextractor
@@ -44,7 +44,7 @@ With the advent of webassembly, it is probably possible to create more compact p
     google-closure-compiler -O ADVANCED script.js --js_output_file script.minified.js &&
 
     # Compress and eliminate repetitions
-    selfextractor-compressor script.minified.js script.minified-compressed.js &&
+    selfextractor-compressor -i script.minified.js -o script.minified-compressed.js &&
     
     # Compose to executable html page
     cat prefix.html script.minified-compressed.js postfix.html > index.html &&
