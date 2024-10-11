@@ -1,4 +1,4 @@
-# selfextractor-minifier
+# selfextractor-compressor
 
 A tool for turning a javascript file into a shorter block of javascript code that unpacks and runs the original code.  
 Geared towards demoscene use and packing small javascript files targeting a few kilobytes.
@@ -12,7 +12,7 @@ The packer requires that at least a few ASCII characters are not used anywhere i
 
 Backticks containing variable placements inside (e.g. \`foo $variablename bar\`) are unfortunately not currently supported, they will interfere with the way the source is packed.  The tool will issue a warning if it finds them, and return the source unmodified.
 
-Note that this tool does not do any structural minifying.  It is recommended to run the code through google-closure-compiler or a similar minifier first.  The selfextractor-minifier is good at compressing repeating sections in already minified code, such as repeating system function calls, "return":s, "this."-instnaces, and so on.  This packer also works fairly well on shader code that often has a lot of repeating "vec ":s and similar.
+Note that this tool does not do any structural minifying.  It is recommended to run the code through google-closure-compiler or a similar minifier first.  The selfextractor-compressor is good at compressing repeating sections in already minified code, such as repeating system function calls, "return ":s, "this."-instnaces, and so on.  This packer also works fairly well on shader code that often has a lot of repeating "vec3 ":s, "float ":s and similar.
 
 The packing time increases exponentially with input source size, so this packer is not well suited for very large applications or websites.  Emphazis has been put on compressing 2-20kb source files as compactly as possible.
 
@@ -22,27 +22,27 @@ With the advent of webassembly, it is probably possible to create more compact p
 
 ## Installation
 
-    npm i selfextractor-minifier
+    npm i selfextractor-compressor
 
 ## Usage
 
-    selfextractor-minifier input.js minified-output.js
+    selfextractor-compressor input.js compressed-output.js
 
 
 ## Example compile script utilizing the selfextractor
 
     #! /bin/bash
     
-    # Uses google closure compiler and selfextractor-minifier
+    # Uses google closure compiler and selfextractor-compressor
     # First make sure you have npm installed,
     # then install the closure compiler with  npm i google-closure-compiler
-    # and the selfextractor compressor with   npm i selfextractor-minifier
+    # and the selfextractor compressor with   npm i selfextractor-compressor
     
     # Minify structurally
     google-closure-compiler -O ADVANCED script.js --js_output_file script.minified.js &&
 
     # Compress and eliminate repetitions
-    selfextractor-minifier script.minified.js script.minified-compressed.js &&
+    selfextractor-compressor script.minified.js script.minified-compressed.js &&
     
     # Compose to executable html page
     cat prefix.html script.minified-compressed.js postfix.html > index.html &&
