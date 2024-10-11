@@ -1,7 +1,9 @@
 # selfextractor-compressor
 
 A tool for turning a javascript file into a shorter block of javascript code that unpacks and runs the original code.  
+
 Geared towards demoscene use and packing small javascript files targeting a few kilobytes.
+
 Not intended or tested for larger websites or web applications.
 
 Packing works by recursively replaceing long repeated pieces of text with a short id.  The unpacker is a relatively compact piece of code that recursively unwinds the packing, and finally calls eval with the unpacked code.
