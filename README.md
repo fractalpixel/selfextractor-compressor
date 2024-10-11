@@ -1,4 +1,4 @@
-# selfextractor-compressor
+# Selfextractor Compressor
 
 A tool for turning a javascript file into a shorter block of javascript code that unpacks and runs the original code.  
 
