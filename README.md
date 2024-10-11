@@ -56,7 +56,7 @@ With the advent of webassembly, it is probably possible to create more compact p
 
 ## License
 
-Apache v. 2.0
+MIT License
 
 
 ## Feedback
