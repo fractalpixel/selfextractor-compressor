@@ -10,7 +10,7 @@ Packing works by recursively replaceing long repeated pieces of text with a shor
 
 The packer requires that at least a few ASCII characters are not used anywhere in the original code (they will be used for separators, id prefixes, and such in the packed format).
 
-Backticks containing variable placements inside (e.g. \`foo $variablename bar\`) are unfortunately not currently supported, they will interfere with the way the source is packed.
+Backticks containing variable placements inside (e.g. \`foo $variablename bar\`) are unfortunately not currently supported, they will interfere with the way the source is packed.  The tool will issue a warning if it finds them, and return the source unmodified.
 
 Note that this tool does not do any structural minifying.  It is recommended to run the code through google-closure-compiler or a similar minifier first.  The selfextractor-minifier is good at compressing repeating sections in already minified code, such as repeating system function calls, "return":s, "this."-instnaces, and so on.  This packer also works fairly well on shader code that often has a lot of repeating "vec ":s and similar.
 
