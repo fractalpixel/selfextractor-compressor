@@ -1,0 +1,34 @@
+selfextractor-compressor
+========================
+
+A tool for turning a javascript file into a shorter block of javascript code that unpacks and runs 
+the original code.  Geared towards demoscene use and packing small javascript files targeting a few
+kilobytes to tens of kilobytes.  Not intended or tested for larger websites or web applications 
+(the compression time grows exponentially with the input size).
+
+Usage
+=====
+
+    selfextractor-compressor [options]
+
+    Example:  selfextractor-compressor  -i input.js  -o compressed-output.js
+
+    Options:
+    -V, --version     Output the version number.
+    -i, --in <file>   Javascript file to compress.
+    -o, --out <file>  File to save output to.  Existing content will be overwritten.
+    -h, --help        Display help for command.
+
+
+Notes
+=====
+
+If the input file could not be compressed smaller than its original size, the original input file is 
+returned instead, and a note printed to the console.
+
+The compressor requires at least a few unused ascii characters, that can be used as separators in
+the self extraction datablock.  It will warn if there is none, and return the source unmodified.
+
+The compressor doesn't unfortunately currently handle files that contain backticks with variable
+references inside (`foo $VarName bar`), as they conflict with the unpacking code.  It will warn 
+about them, and return the source unmodified.
