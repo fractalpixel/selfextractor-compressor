@@ -6,7 +6,7 @@ Geared towards demoscene use and packing small javascript files targeting a few 
 
 Not intended or tested for larger websites or web applications.
 
-Packing works by recursively replacing repeated pieces of text with a shorter id.  The unpacker is a relatively compact piece of code that recursively unwinds the packing, and finally calls eval with the unpacked code.
+Packing works by recursively replacing repeated pieces of text with a shorter id.  The unpacker is a relatively compact piece of code that recursively unwinds the packing, and finally calls `eval` with the unpacked code.
 
 ## Limitations
 
