@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "name": "selfextractor-compressor",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A tool for turning a javascript file into a shorter block of javascript code that unpacks and runs the original code.  Packing works by recursively replaceing long repeated pieces of text with a short id.  Requires that at least a few ASCII characters are not used anywhere in the original code (used for separators, id prefixes, and such in the packed format).  Intended for short demoscene entries and similar that aim for a few kilobytes of size.  Not intended or tested for larger websites or web applications.",
+  "source": "bin/main.ts",
+  "main": "bin/main.js",
+  "bin": {
+    "selfextractor-compressor": "bin/main.js"
+  },
+  "man": ".man/doc.1",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fractalpixel/selfextractor-compressor.git"
+  },
+  "keywords": [
+    "selfextractor",
+    "compressor",
+    "minifier",
+    "packer",
+    "demoscene",
+    "4k",
+    "1k"
+  ],
+  "author": "fractalpixel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fractalpixel/selfextractor-compressor/issues"
+  },
+  "homepage": "https://github.com/fractalpixel/selfextractor-compressor#readme",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/random-seed": "^0.3.5",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "random-seed": "^0.3.0",
+    "tslog": "^4.9.3"
+  }
+}
