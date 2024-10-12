@@ -6,7 +6,7 @@ import { ILogObj, Logger } from "tslog";
 const MaxReplacedStringLength = 20;
 
 export const DEFAULT_CONFIG: RecursiveReplacerConfig = {
-    rounds: 20, // 100
+    rounds: 50, // 100
     parameterVariation: 0.4,
     topReplacementsToSelectFrom: 3,
     selectionFocus: 0.7,
@@ -82,13 +82,16 @@ export default async function compress(source: string, logger: Logger<ILogObj>, 
 
     logger.info("Attempting Recursice Replacer compression" )
 
-    // TODO: Parcel probably has some kind of messaging system?
     if (config.verbose) {
         logger.debug("Selfextractor: Recursive Replacer trying out different replacements on " + source.length + " byte source")
-        console.group()
+        //console.group()
     }
 
     let rand: Random.RandomSeed = Random.create(config.randomSeed)
+
+    // Sanitize input string, replace newlines with spaces.
+    // Should work except if it contains backticks (which we do not support).
+    source = utils.replaceAll(source, "\n", " ")
 
     // Keep track of results so far, seed with current config and source
     type ConfigResult = { config: RecursiveReplacerConfig, result: string }
@@ -172,7 +175,7 @@ export default async function compress(source: string, logger: Logger<ILogObj>, 
         }
     }
 
-    if (config.verbose) console.groupEnd()     
+    //if (config.verbose) console.groupEnd()     
 
     return result
 }

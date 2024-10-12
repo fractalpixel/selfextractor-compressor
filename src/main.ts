@@ -60,7 +60,7 @@ async function doCompress(source :string): Promise<string> {
         logger.error("The source contains backtick characters `. The self-extractor compresser currently may have trouble with those (specifically, any $references or ${ code blocks } inside them).")
 
         // Abort
-        //return source
+        return source
     }
 
     // Get the content of the (last) <script></script> tag

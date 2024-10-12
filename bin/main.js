@@ -44,7 +44,7 @@ async function doCompress(source) {
     if (source.includes("`")) {
         logger.error("The source contains backtick characters `. The self-extractor compresser currently may have trouble with those (specifically, any $references or ${ code blocks } inside them).");
         // Abort
-        //return source
+        return source;
     }
     // Get the content of the (last) <script></script> tag
     var extractedSource = source.match(/^.*<script[^>]*>((?:.|\n)*)<\/script>.*$/im)?.map((value) => value)[1];

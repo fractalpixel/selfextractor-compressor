@@ -3,7 +3,7 @@ import Random from "random-seed";
 // Raising this slows the replacer, while there are usually few long repeated strings (although they could exist)
 const MaxReplacedStringLength = 20;
 export const DEFAULT_CONFIG = {
-    rounds: 20, // 100
+    rounds: 50, // 100
     parameterVariation: 0.4,
     topReplacementsToSelectFrom: 3,
     selectionFocus: 0.7,
@@ -14,12 +14,14 @@ export const DEFAULT_CONFIG = {
 };
 export default async function compress(source, logger, config = DEFAULT_CONFIG) {
     logger.info("Attempting Recursice Replacer compression");
-    // TODO: Parcel probably has some kind of messaging system?
     if (config.verbose) {
         logger.debug("Selfextractor: Recursive Replacer trying out different replacements on " + source.length + " byte source");
-        console.group();
+        //console.group()
     }
     let rand = Random.create(config.randomSeed);
+    // Sanitize input string, replace newlines with spaces.
+    // Should work except if it contains backticks (which we do not support).
+    source = utils.replaceAll(source, "\n", " ");
     let alternativeResults = [{ config: config, result: source }];
     function getNthFractionBestResult(n = 0) {
         // Sort results by result length
@@ -83,8 +85,7 @@ export default async function compress(source, logger, config = DEFAULT_CONFIG) 
             logger.debug(JSON.stringify(best.config));
         }
     }
-    if (config.verbose)
-        console.groupEnd();
+    //if (config.verbose) console.groupEnd()     
     return result;
 }
 function tuneConfig(config, round, rand) {
