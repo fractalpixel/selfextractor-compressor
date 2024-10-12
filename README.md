@@ -16,7 +16,7 @@ replacement strings with replacements, going in reverse order), and finally call
 ## Limitations
 
 The packer requires that at least a few ASCII characters are not used anywhere in the original code
-(they will be used for separators, keys and key prefixes, and such in the packed format).
+(they will be used for separators, keys, and key prefixes in the packed format).
 
 Backticks containing variable placements inside (e.g. \`foo $variablename bar\`) are unfortunately not 
 currently supported, they will interfere with the way the source is packed.  The tool will issue a
