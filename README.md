@@ -36,7 +36,7 @@ Very small source files do not benefit from this compression system, as it adds 
 unpacking code.  If the compressed size would be larger than the input size, the compressor returns the input 
 code unchanged and issues a notification to the console about that.
 
-With the advent of webassembly and the compression streams web API it is probably possible to create more 
+With the advent of webassembly and the compression streams web API it is likely possible to create more 
 compact packing using either of those, so this is probably not the most optimal way to pack javascript, 
 but it does tend to shrink traditionally minified code somewhat.
 
