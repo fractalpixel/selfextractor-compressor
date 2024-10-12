@@ -1,26 +1,44 @@
 # Selfextractor Compressor for Javascript
 
-A tool for turning a javascript file into a shorter block of javascript code that unpacks and runs the original code.  
+A tool for turning a javascript file into a shorter block of javascript code that unpacks
+and runs the original code.  
 
 Geared towards demoscene use and packing small javascript files targeting a few kilobytes.
 
 Not intended or tested for larger websites or web applications.
 
-Packing works by recursively replacing repeated pieces of text with a shorter id.  The unpacker is a relatively compact piece of code attached to the compressed result, that recursively unwinds the packing, and finally calls `eval` with the unpacked code.
+Packing works by recursively replacing repeated pieces of text with a shorter key.  The replacement 
+operates on both the packed text as well as the list of earlier replacements.  The unpacker is a relatively 
+compact piece of code (about 136 characters, not counting the character array of used key characters) attached 
+to the compressed result that recursively unwinds the packing (replacing keys in the packed text and
+replacement strings with replacements, going in reverse order), and finally calls `eval` with the unpacked code.
 
 ## Limitations
 
-The packer requires that at least a few ASCII characters are not used anywhere in the original code (they will be used for separators, id prefixes, and such in the packed format).
+The packer requires that at least a few ASCII characters are not used anywhere in the original code
+(they will be used for separators, keys and key prefixes, and such in the packed format).
 
-Backticks containing variable placements inside (e.g. \`foo $variablename bar\`) are unfortunately not currently supported, they will interfere with the way the source is packed.  The tool will issue a warning if it finds them, and return the source unmodified.
+Backticks containing variable placements inside (e.g. \`foo $variablename bar\`) are unfortunately not 
+currently supported, they will interfere with the way the source is packed.  The tool will issue a
+warning if it finds them, and return the source unmodified.
 
-Note that this tool does not do any structural minifying.  It is recommended to run the code through google-closure-compiler or a similar minifier first.  The selfextractor-compressor is good at compressing repeating sections in already minified code, such as repeating system function calls, "return ":s, "this."-instnaces, and so on.  This packer also works fairly well on shader code that often has a lot of repeating "vec3 ":s, "float ":s and similar.
+Note that this tool does not do any structural minifying.  It is recommended to run the code through
+google-closure-compiler or a similar minifier first.  The selfextractor-compressor is good at compressing
+repeating sections in already minified code, such as repeating system function calls, "return ":s, 
+"this."-instnaces, and so on.  This packer also works fairly well on shader code that often has a lot 
+of repeating "vec3 ":s, "float ":s and similar.
 
-The packing time increases exponentially with input source size, so this packer is not well suited for very large applications or websites.  Emphazis has been put on compressing 2-20kb source files as compactly as possible.
+The packing time increases exponentially with input source size, so this packer is not well suited for very 
+large applications or websites.  Emphazis has been put on compressing 2-20kb source files as compactly as 
+possible.
 
-Very small source files do not benefit from this compression system, as it adds overhead in the form of the unpacking code.  If the compressed size would be larger than the input size, the compressor returns the input code unchanged and issues a notification to the console about that.
+Very small source files do not benefit from this compression system, as it adds overhead in the form of the 
+unpacking code.  If the compressed size would be larger than the input size, the compressor returns the input 
+code unchanged and issues a notification to the console about that.
 
-With the advent of webassembly, it is probably possible to create more compact packing using some technology based on that, so this is probably not the most optimal way to pack javascript, but it does tend to shrink traditionally minified code somewhat.
+With the advent of webassembly, it is probably possible to create more compact packing using some technology 
+based on that, so this is probably not the most optimal way to pack javascript, but it does tend to shrink 
+traditionally minified code somewhat.
 
 ## Installation
 
@@ -67,6 +85,15 @@ A good minifier.
 https://github.com/google/closure-compiler
 
 
+### Compression Streams API
+
+Needs a binary blob delivered to it, but supports e.g. gzip packing.
+So would need an efficient data encoding, code for unpacking it,
+code for running it through the compression streams, and an eval of the result.
+Might be some overhead for under 1k cases, but likely more efficient for larger cases.
+https://developer.mozilla.org/en-US/docs/Web/API/Compression_Streams_API
+
+
 ### Crunchme
 
 Crunchme operates on a similar principle as selfextractor-compressor.
@@ -78,11 +105,13 @@ https://crunchme.bitsnbites.eu/
 
 https://www.bitsnbites.eu/compression-of-javascript-programs/
 
+
 ### Others
 
 - jsExe: http://creativejs.com/2012/06/jsexe-javascript-compressor/
 - javascript packify: https://github.com/cowboy/javascript-packify
 - jsCrush: http://iteral.com/jscrush/
+- See also analysis at: https://timepedia.blogspot.com/2009/08/on-reducing-size-of-compressed.html
 
 
 ## Feedback
