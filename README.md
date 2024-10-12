@@ -59,6 +59,32 @@ With the advent of webassembly, it is probably possible to create more compact p
 MIT License
 
 
+## Similar or other useful tools
+
+### Google Closure Compiler
+
+A good minifier.
+https://github.com/google/closure-compiler
+
+
+### Crunchme
+
+Crunchme operates on a similar principle as selfextractor-compressor.
+It packs the javascript source using LZG and DEFLATE and bundles a small 
+decompressor to uncompress and run the compressed code.  However, it 
+targets slightly larger file sizes, such as 64k demos.
+
+https://crunchme.bitsnbites.eu/
+
+https://www.bitsnbites.eu/compression-of-javascript-programs/
+
+### Others
+
+- jsExe: http://creativejs.com/2012/06/jsexe-javascript-compressor/
+- javascript packify: https://github.com/cowboy/javascript-packify
+- jsCrush: http://iteral.com/jscrush/
+
+
 ## Feedback
 
 Report any issues and feature requests on the github issue tracker.
