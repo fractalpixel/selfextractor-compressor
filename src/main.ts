@@ -33,11 +33,11 @@ async function main() {
     const outFileName = options["out"]
 
     // Read input
-    logger.warn("Reading input from " + inFileName)
+    logger.info("Reading input from " + inFileName)
     const input = fs.readFileSync(inFileName, 'utf8');
 
     // Compress
-    logger.error("Compressing...")
+    logger.info("Compressing...")
     let compressed = await doCompress(input)
 
     // Write output
