@@ -48,6 +48,12 @@ but it does tend to shrink traditionally minified code somewhat.
 
     selfextractor-compressor  --in input.js  --out compressed-output.js
 
+    Options:
+    -i, --in <file>   Javascript file to compress.
+    -o, --out <file>  File to save output to.  Existing content will be overwritten.
+    -V, --version     Output the version number.
+    -h, --help        Display help for command.
+
 
 ## Example compile script utilizing the selfextractor
 
