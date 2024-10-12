@@ -70,7 +70,8 @@ but it does tend to shrink traditionally minified code somewhat.
     # Compress and eliminate repetitions
     selfextractor-compressor -i script.minified.js -o script.minified-compressed.js &&
     
-    # Compose to executable html page
+    # Compose to stand-alone html page
+    # (prefix and postfix files should contain html to add before and after the script).
     cat prefix.html script.minified-compressed.js postfix.html > index.html &&
     
     # Show size of final entry
